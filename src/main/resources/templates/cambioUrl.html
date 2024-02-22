@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor AstroTerrassa</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, 0.1); color: #fff;">
+    <a class="navbar-brand" href="/index" style="color: #fff;"><img src="/images/logoAAT.png"></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/perfil"><i class="fas fa-user" style="color: #fff;"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="myHorizontalNav" class="horizontal-nav">
+    <a href="/index"><i class="fas fa-home"></i></a>
+    <!--<a href="/eventos">Eventos</a>-->
+    <a th:if="${showDiv}" href="/listado">Socios</a>
+    <a href="/listadoMaterial">Material</a>
+    <!--<a href="/pago">Pago</a>-->
+    <a th:if="${showDiv}" href="/stats">Reportes</a>
+    <a href="/perfil">Configuración</a>
+    <!-- <a href="/sugerencias">Sugerencias</a> -->
+    <!-- <a href="/material">Material</a> -->
+    <a href="/logout">Cerrar sesión</a>
+</div>
+
+
+<!-- -->
+<!-- Contenido principal -->
+<div class="my-container">
+    <h1>Cambio de URL</h1>
+    <form th:action="@{/cambioUrl}" method="post">
+        <label for="url">Nueva URL:</label><br>
+        <input type="text" id="url" name="url" value="" required><br>
+        <input type="submit" value="Cambiar URL">
+    </form>
+</div>
+
+<!-- Bootstrap JS y jQuery (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalles del Pago</title>
+</head>
+    <body>
+        <h1>Detalles del Pago</h1>
+            <p>Nombre: <span th:text="${pago.user.nombre}"></span></p>
+            <p>Apellidos: <span th:text="${pago.user.apellidos}"></span></p>
+            <p>Email: <span th:text="${pago.user.mail}"></span></p>
+            <p>DNI: <span th:text="${pago.user.dni}"></span></p>
+            <p>Cantidad: <span th:text="${pago.precio}"></span></p>
+            <p>Número de Cuenta: <span th:text="${pago.cuenta}"></span></p>
+            <p>Fecha: <span th:text="${pago.fechaPago}"></span></p>
+    </body>
+    <!-- Bootstrap JS y jQuery (opcional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>

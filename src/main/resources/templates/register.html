@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+<style>
+    body {
+            background-image: url('/static/images/logoAAT.png');/* Imagen de fondo de muestra */
+            background-color: #EAEAEA;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: top; /* Mueve la imagen de fondo hacia arriba */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 15px;
+        padding: 20px;
+        margin-top: 50px;
+        display: flex; /* Add this line */
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+        th {
+            background-color: #4287f5;
+            color: Black;
+        }
+
+        th,
+        td {
+            width: 20%;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #ccc;
+            border-width: thin;
+            padding: 20px;
+            border-radius: 10px;
+            );
+        }
+</style>
+<body>
+<div class="container text-center">
+    <div>
+        <h2>Registro de nuevo socio</h2>
+        <br/>
+    </div>
+    <form th:action="@{/makeRegistration}" method="post" style="max-width: 400px; margin: 0 auto;">
+        <div class="border border-secondary rounded p-3">
+            <div th:if="${param.error}">
+                <p class="text-danger">User already exists!</p>
+            </div>
+            <div th:if="${param.logout}">
+                <p class="text-warning">You have been logged out.</p>
+            </div>
+            <div>
+                <p><input type="text" name="nombre" required class="form-control" placeholder="nombre" /></p>
+            </div>
+            <div>
+                <p><input type="text" name="apellidos" required class="form-control" placeholder="apellidos" /></p>
+            </div>
+            <div>
+                <p><input type="tel" name="tlf" required class="form-control" placeholder="tlf" /></p>
+            </div>
+            <div>
+                <p><input type="email" name="mail" required class="form-control" placeholder="mail" /></p>
+            </div>
+            <div>
+                <p><input type="text" name="username" required class="form-control" placeholder="username" /></p>
+            </div>
+            <div>
+                <p><input type="password" name="password" required class="form-control" placeholder="password" /></p>
+            </div>
+            <div>
+                <p><input type="date" name="fecha_nt" required class="form-control" placeholder="fecha_nt" /> </p>
+            </div>
+            <div>
+                <p>
+                    <select required name="genero" class="form-control" placeholder="genero">
+                        <option value="0">Hombre</option>
+                        <option value="1">Mujer</option>
+                        <option value="2">Otro</option>
+                    </select>
+                </p>
+            </div>
+            <div>
+                <div>
+                <label>Notify</label>
+                    <p><input type="checkbox" id="notify_check" name="notify_check" th:checked="${user != null && user.notify_check == 1}"> </p>
+                </div>
+            </div>
+            <div>
+                <p><input type="submit" value="Register" class="btn btn-primary" /></p>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

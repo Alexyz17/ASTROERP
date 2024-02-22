@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gestor AstroTerrassa</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+
+    </head>
+
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, 0.1); color: #fff;">
+        <a class="navbar-brand" href="/index" style="color: #fff;"><img src="/images/logoAAT.png"></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/perfil"><i class="fas fa-user" style="color: #fff;"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="myHorizontalNav" class="horizontal-nav">
+        <a href="/index"><i class="fas fa-home"></i></a>
+        <!--<a href="/eventos">Eventos</a>-->
+        <a th:if="${showDiv}" href="/listado">Socios</a>
+        <a href="/listadoMaterial">Material</a>
+        <!--<a href="/pago">Pago</a>-->
+        <a th:if="${showDiv}" href="/stats">Reportes</a>
+        <a href="/perfil">Configuración</a>
+        <!-- <a href="/sugerencias">Sugerencias</a> -->
+        <!-- <a href="/material">Material</a> -->
+        <a href="/logout">Cerrar sesión</a>
+    </div>
+
+
+    <!-- Contenido principal -->
+<div class="my-container2">
+    <h1>Listado de Usuarios</h1>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Telefono</th>
+            <th>Email</th>
+            <th>DNI</th>
+            <th>Notify</th>
+            <th>Genero</th>
+            <th>Fecha Nacimiento</th>
+            <th>Fecha Registro</th>
+            <th>Tipo de ingreso</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Cada fila representa un usuario -->
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.nombre}"></td>
+            <td th:text="${user.apellidos}"></td>
+            <td th:text="${user.tlf}"></td>
+            <td th:text="${user.mail}"></td>
+            <td th:text="${user.dni}"></td>
+            <td th:text="${user.notify == 1 ? 'Si' : 'No'}"></td>
+            <td th:text="${user.genero == 0 ? 'Hombre' : (user.genero == 1 ? 'Mujer' : 'Otro')}"></td>
+            <td th:text="${#dates.format(user.fecha_nt, 'dd-MM-yyyy')}"></td>
+            <td th:text="${user.getRegisterDate()}"></td>
+            <td th:text="${user.ingreso == 0 ? 'Socio Honorífico' : (user.ingreso == 1 ? 'Transferencia' : (user.ingreso == 3 ? 'Estudiante' : 'Pago Web'))}"></td>
+            <td th:if="${currentUser.permisos == 2}">
+                <a th:href="@{'/userDetails/'+${user.username}}" class="btn btn-primary btn-sm">Editar</a>
+            </td>
+            <td th:if="${currentUser.permisos == 2}">
+                <a th:href="@{'/cambiarPermiso/'+${user.username}}" class="btn btn-primary btn-sm" style="width: 100px;">Editar Rol</a>
+            </td>
+            <td th:if="${currentUser.permisos == 2}">
+                <a th:href="@{'/deleteUser/'+${user.user_id}}" class="btn btn-danger btn-b earlier btn btn-primary btn-sm" onclick="return confirm('Seguro que quiere Eliminar?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <div th:if="${currentUser.permisos == 2}" class="text-center">
+            <a href="/register" class="btn btn-primary">Nuevo Usuario</a>
+        </div>
+        <!-- <a th:href="@{/person}" class="btn btn-success btn-lg">Add Person</a> -->
+    </div>
+
+    <div class="btn-group" role="group" aria-label="Botones de acción">
+        <button onclick="window.location.href='/persons/pdf'" class="btn btn-success">Descargar como PDF</button>
+        <button id="sendEmailButton" class="btn btn-success">Enviar por correo csv</button>
+    </div>
+
+</div>
+
+<!-- Bootstrap JS y jQuery (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+document.getElementById('sendEmailButton').addEventListener('click', function() {
+    // Solicita una dirección de correo electrónico
+    var email = prompt("Direccion de correo:");
+
+    fetch('/sendUserList?email=' + encodeURIComponent(email))
+    .then(response => {
+        if (response.ok) {
+            alert('Email enviado!!');
+        } else {
+            alert('Ups, ha habido un error!!');
+        }
+    });
+});
+</script>
+
+</body>
+
+</html>

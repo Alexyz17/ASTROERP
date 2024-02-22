@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org" lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/stats.css}">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, 0.1); color: #fff;">
+    <a class="navbar-brand" href="/index" style="color: #fff;"><img src="/images/logoAAT.png"></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/perfil"><i class="fas fa-user" style="color: #fff;"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="myHorizontalNav" class="horizontal-nav">
+    <a href="/index"><i class="fas fa-home"></i></a>
+    <!--<a href="/eventos">Eventos</a>-->
+    <a th:if="${showDiv}" href="/listado">Socios</a>
+    <a href="/listadoMaterial">Material</a>
+    <!--<a href="/pago">Pago</a>-->
+    <a th:if="${showDiv}" href="/stats">Reportes</a>
+    <a href="/perfil">Configuración</a>
+    <!-- <a href="/sugerencias">Sugerencias</a> -->
+    <!-- <a href="/material">Material</a> -->
+    <a href="/logout">Cerrar sesión</a>
+</div>
+
+<!-- Contenido principal -->
+<div class="my-container">
+    <h1>Estadisticas y graficos</h1>
+    <p>Un sistema completo para la gestión eficiente de recursos en tu empresa.</p>
+    <button id="sendEmailButton" class="btn btn-primary">Enviar por correo</button>
+    <button id="downloadPdfButton" class="btn btn-primary">Descargar PDF</button>
+    <!-- Aquí están los desplegables para seleccionar el tipo de gráfico y el rango de fechas -->
+    <select id="dataType" class="custom-select">
+        <option value="">Seleccione un tipo de gráfico</option>
+        <option value="Usuarios registrados">Usuarios registrados</option>
+        <option value="Usuarios conectados">Usuarios Conectados</option>
+        <!--<option value="UsuariosDNI">Usuarios con DNI</option> -->
+        <!--<option value="AuthMethod">AuthMethod</option>-->
+        <option value="Genero">Género de los usuarios</option>
+        <option value="Edad">Edad de los usuarios</option>
+        <option value="Roles">Roles</option>
+        <!-- <option value="Simpatizantes">Simpatizantes</option>-->
+        <!-- <option value="SimpatizantesVsNo">Simpatizantes vs Miembros</option>-->
+        <!--<option value="MembresiaCaducada">Membresias caducadas</option>-->
+        <!-- <option value="Eventos">Eventos</option> -->
+        <!--<option value="EventosActivos">Eventos activos</option> -->
+        <!--<option value="EventosUser">Usuarios apuntados por evento</option> -->
+        <!--<option value="TipoEvento">Tipos de eventos</option> -->
+        <!--<option value="Tipos de sugerencias">Tipos de sugerencias</option> -->
+        <!--<option value="SugerenciasDate">Sugerencias</option> -->
+        <!--option value="Balance">Balance empresa</option>-->
+        <!-- <option value="Cuotas">Cuotas</option> -->
+        <option value="notify">Usuarios con notify</option>
+        <option value="MaterialCount">Material inventario</option>
+        <option value="Material">Material tipo</option>
+        <option value="MaterialUbi">Material por ubicacion</option>
+    </select>
+    <canvas id="myChart"></canvas>
+    <div id="chartData" style="display: none"></div>
+    <select id="year" style="display: none;"></select>
+    <select id="month" style="display: none;"></select>
+    <select id="evento" style="display: none;"></select>
+    <button id="acceptButton" style="display: none;">Aceptar</button>
+</div>
+
+<!-- Bootstrap JS y jQuery (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script th:src="@{/js/chart.js}"></script>
+</body>
+</html>
+

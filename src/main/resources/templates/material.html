@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gestor AstroTerrassa</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+
+    </head>
+
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, 0.1); color: #fff;">
+        <a class="navbar-brand" href="/index" style="color: #fff;"><img src="/images/logoAAT.png"></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/perfil"><i class="fas fa-user" style="color: #fff;"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="myHorizontalNav" class="horizontal-nav">
+        <a href="/index"><i class="fas fa-home"></i></a>
+        <!--<a href="/eventos">Eventos</a>-->
+        <a th:if="${showDiv}" href="/listado">Socios</a>
+        <a href="/listadoMaterial">Material</a>
+        <!--<a href="/pago">Pago</a>-->
+        <a th:if="${showDiv}" href="/stats">Reportes</a>
+        <a href="/perfil">Configuración</a>
+        <!-- <a href="/sugerencias">Sugerencias</a> -->
+        <!-- <a href="/material">Material</a> -->
+        <a href="/logout">Cerrar sesión</a>
+    </div>
+
+
+    <!-- Contenido principal -->
+<!-- Contenido principal -->
+<div class="my-container">
+    <div class="row justify-content-center">
+        <div class="col-md-20">
+            <div>
+                <div>
+                    <h1>Nuevo Material</h1>
+                </div>
+                <div>
+                    <form action="#" th:action="@{/material}" th:object="${material}" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="materialInput">Material</label>
+                            <input type="text" id="materialInput" name="materialDisplay" value="Nuevo material" class="form-control" readonly>
+                            <input type="hidden" id="materialValue" name="material" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="material_nombre">Nombre</label>
+                            <input type="text" id="material_nombre" th:field="*{material_nombre}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" id="cantidad" th:field="*{cantidad}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="ubicacion">Descripción</label>
+                            <textarea id="ubicacion" th:field="*{ubicacion}" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagen">Subir foto:</label>
+                            <input type="file" id="imagen" name="imagen">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Enviar" class="btn btn-primary">
+                        </div>
+                    </form>
+                    <!-- <div class="form-group">
+                        <button id="sendEmailButton" class="btn btn-primary">Enviar lista de materiales</button>
+                        <button id="downloadButton" class="btn btn-primary">Descargar pdf</button>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS y jQuery (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+    document.getElementById('materialSelect').addEventListener('change', function() {
+        var selectedId = this.value;
+
+        if (selectedId) {
+            fetch('/materialDetails?id=' + encodeURIComponent(selectedId))
+                .then(response => response.json())
+                .then(material => {
+                    document.getElementById('material_nombre').value = material.material_nombre;
+                    document.getElementById('cantidad').value = material.cantidad;
+                    document.getElementById('ubicacion').value = material.ubicacion;
+                });
+        } else {
+            document.getElementById('material_nombre').value = '';
+            document.getElementById('cantidad').value = '';
+            document.getElementById('ubicacion').value = '';
+        }
+    });
+        document.getElementById('sendEmailButton').addEventListener('click', function() {
+        var email = prompt("Direccion de correo:");
+
+        fetch('/sendMaterialesList?email=' + encodeURIComponent(email))
+        .then(response => {
+            if (response.ok) {
+                alert('Email enviado!!');
+            } else {
+                alert('Ups, ha habido un error!!');
+            }
+        });
+    });
+
+document.getElementById('downloadButton').addEventListener('click', function() {
+    fetch('/downloadMaterialesList')
+        .then(response => response.blob())
+        .then(blob => {
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'materiales.pdf';
+            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+            a.click();
+            a.remove();  //afterwards we remove the element again
+        });
+});
+
+</script>

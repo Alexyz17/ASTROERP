@@ -1,0 +1,101 @@
+body {
+  /*background-image: url('https://raw.githubusercontent.com/Voldwyce/AstroTerrassa/master/src/main/resources/templates/ComfyUI_00149_.png');*/ /* Imagen de fondo de muestra */
+    background-color: #EAEAEA;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 70%; /* Mueve la imagen de fondo hacia arriba */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.my-container {
+    background-color: #ffffff; /* Contenedor blanco sin transparencia */
+    padding: 20px;
+    margin-top: 0; /* Sin separación con el navbar */
+    margin-bottom: 5cm; /* Separación de 5cm en los bordes inferiores */
+    margin-left: 5cm; /* Separación de 5cm en los bordes izquierdos */
+    margin-right: 5cm; /* Separación de 5cm en los bordes derechos */
+    height: 100%; /* Contenedor hasta el final de la página */
+    display: flex; /* Hace que los elementos hijos se comporten como elementos flexibles */
+    flex-direction: column; /* Los elementos hijos se apilan verticalmente */
+    align-items: center; /* Centra los elementos hijos horizontalmente */
+    justify-content: center; /* Centra los elementos hijos verticalmente */
+}
+
+.horizontal-nav {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #454E5C; /* Nuevo color de fondo */
+    padding: 3px 0;
+}
+
+.horizontal-nav a {
+    color: #D1D3D6; /* Color de las letras */
+    text-decoration: none;
+    padding: 5px;
+    margin-left: 50px;
+}
+
+.navbar {
+    background-image: url('/images/fons_header15.jpg'); /* Imagen de fondo */
+    background-size: cover; /* Asegura que la imagen cubra todo el nav */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+.table {
+    margin-left: auto;
+    margin-right: auto;
+}
+.btn-group .btn {
+    margin-right: 10px; /* Separación a la derecha de cada botón */
+}
+
+.card {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* Ajusta este valor según tus necesidades */
+}
+
+p {
+    font-size: 16px; /* Ajusta este valor según tus necesidades */
+    min-height: 3em; /* Altura mínima para dos líneas */
+    max-height: 3em; /* Altura máxima para dos líneas */
+    overflow: hidden; /* Oculta el contenido que excede la altura máxima */
+}

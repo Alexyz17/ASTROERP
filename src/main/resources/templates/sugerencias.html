@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gestor AstroTerrassa</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+
+    </head>
+
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, 0.1); color: #fff;">
+        <a class="navbar-brand" href="/index" style="color: #fff;"><img src="/images/logoAAT.png"></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/perfil"><i class="fas fa-user" style="color: #fff;"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="myHorizontalNav" class="horizontal-nav">
+        <a href="/index"><i class="fas fa-home"></i></a>
+        <!--<a href="/eventos">Eventos</a>-->
+        <a th:if="${showDiv}" href="/listado">Socios</a>
+        <a href="/listadoMaterial">Material</a>
+        <!--<a href="/pago">Pago</a>-->
+        <a th:if="${showDiv}" href="/stats">Reportes</a>
+        <a href="/perfil">Configuración</a>
+        <!-- <a href="/sugerencias">Sugerencias</a> -->
+        <!-- <a href="/material">Material</a> -->
+        <a href="/logout">Cerrar sesión</a>
+    </div>
+
+    <!-- Contenido principal -->
+<div class="my-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div>
+                <div>
+                    <h1>Sugerencias</h1>
+                </div>
+                <div>
+                    <p>Haz tus sugerencias de manera anonima para ayudarnos a mejorar el sitio web.</p>
+                    <form action="#" th:action="@{/sugerencias}" th:object="${sugerencia}" method="post">
+                        <div class="form-group">
+                            <label for="titulo">Titulo</label>
+                            <input type="text" id="titulo" th:field="*{titulo}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoSugerencia">Tipo de sugerencia:</label>
+                            <select id="tipoSugerencia" th:field="*{tipoSugerencia}" class="form-control">
+                                <option value="Sugerencia">Sugerencia</option>
+                                <option value="Queja">Queja</option>
+                                <option value="Reclamación">Reclamación</option>
+                                <option value="Error">Error</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sugerencia_txt">Sugerencia:</label>
+                            <textarea id="sugerencia_txt" th:field="*{sugerencia_txt}" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Enviar" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS y jQuery (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+</script>

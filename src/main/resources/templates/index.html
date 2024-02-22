@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor AstroTerrassa</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(255, 255, 255, 0.1); color: #fff;">
+    <a class="navbar-brand" href="/index" style="color: #fff;"><img src="/images/logoAAT.png"></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/perfil"><i class="fas fa-user" style="color: #fff;"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="myHorizontalNav" class="horizontal-nav">
+    <a href="/index"><i class="fas fa-home"></i></a>
+    <!--<a href="/eventos">Eventos</a>-->
+    <a th:if="${showDiv}" href="/listado">Socios</a>
+    <a href="/listadoMaterial">Material</a>
+    <!--<a href="/pago">Pago</a>-->
+    <a th:if="${showDiv}" href="/stats">Reportes</a>
+    <a href="/perfil">Configuración</a>
+    <!-- <a href="/sugerencias">Sugerencias</a> -->
+    <!-- <a href="/material">Material</a> -->
+    <a href="/logout">Cerrar sesión</a>
+</div>
+
+
+<!-- -->
+<!-- Contenido principal -->
+<div class="my-container">
+    <h1>Bienvenido al ERP @AstroTerrassa</h1>
+    <p>Un sistema completo para la gestión eficiente de recursos en tu agrupación.</p>
+    <div class="d-flex">
+        <div class="col-md-6 text-right">
+            <a th:if="${showDiv}" href="/listado"><h3>Socios</h3></a>
+            <p th:if="${showDiv}">Registra y gestiona la información de tus socios.</p>
+            <a href="/listadoMaterial"><h3>Material</h3></a>
+            <p>Gestiona el material.</p>
+        </div>
+        <div class="col-md-6 text-left">
+            <a th:href="${url}"><h3>Revista</h3></a>
+            <p>Explora la información de tus revistas sobre astronomía.</p>
+            <a th:if="${showDiv}" href="/stats"><h3>Reportes</h3></a>
+            <p th:if="${showDiv}">Genera informes detallados.</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center" th:if="${showDiv}">
+        <div class="col-md-12 ">
+            <a href="/cambioUrl"><h3>Cambio Revista</h3></a>
+            <p>Cambia tu enlace de revistas.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS y jQuery (opcional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>

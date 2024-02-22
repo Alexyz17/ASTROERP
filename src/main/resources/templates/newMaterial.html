@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Material</title>
+</head>
+<body>
+<h1>Create New Material</h1>
+<form action="/newMaterial" method="post" enctype="multipart/form-data">
+    <label for="material_name">Material Name:</label><br>
+    <input type="text" id="material_name" name="material_name"><br>
+    <label for="quantity">Quantity:</label><br>
+    <input type="number" id="quantity" name="quantity"><br>
+    <label for="location">Location:</label><br>
+    <input type="text" id="location" name="location"><br>
+    <label for="image">Image:</label><br>
+    <input type="file" id="image" name="image"><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
